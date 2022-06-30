@@ -8,11 +8,17 @@ import SidebarChat from "../SidebarChat/SidebarChat";
 import { Avatar, Icon, IconButton } from "@mui/material";
 import { Forum, Phone, Settings } from "@mui/icons-material";
 import LogoutIcon from '@mui/icons-material/Logout';
+import { selectUser } from "../../features/users";
+import { useSelector } from "react-redux";
+import { auth } from "../../firebase/firebase";
 
 
 
 
 const Sidebar = () => {
+
+    const user = useSelector(selectUser);
+
     return (
         <div className="sidebar">
             <div className="sidebar__header">
@@ -87,7 +93,10 @@ const Sidebar = () => {
             </div>
             <div className="sidebar__footer">
                 <IconButton>
-                    <Avatar className="sidebar__footer_avatar"/>
+                    <Avatar 
+                        className="sidebar__footer_avatar"
+                        src={user.photo}
+                    />
                 </IconButton>
                 <IconButton>
                     <Phone />
@@ -98,7 +107,7 @@ const Sidebar = () => {
                 <IconButton>
                     <Settings />
                 </IconButton>
-                <IconButton>
+                <IconButton onClick={() => auth.signOut()}>
                     <LogoutIcon />
                 </IconButton>
             </div>

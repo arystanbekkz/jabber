@@ -9,14 +9,17 @@ import { Routes, Route } from "react-router-dom";
 
 function App() {
 
-  // const user = useSelector(selectUser);
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
       if(authUser) {
         dispatch(login({
-
+          uid: authUser.uid,
+          photo: authUser.photoURL,
+          displayName: authUser.displayName,
+          email: authUser.email
         }))
       } else {
         dispatch(logout());
@@ -25,23 +28,18 @@ function App() {
       console.log(authUser);
 
     })
-  })
+  }, [dispatch])
 
-  const user = true;
 
-  return  user ?
-  (
+  return (
     <div className='App'>
       <Routes>
-        <Route path='/' element={ <WebChat /> } />
-      </Routes>
-    </div>
-  )
-  :
-  (
-    <div className='App'>
-      <Routes>
-        <Route path="/login" element={ <Login /> } />
+        {user ?
+          <Route path='/' element={ <WebChat /> } />
+
+          :
+          <Route path='/' element={ <Login /> } />
+        }
       </Routes>
     </div>
   )
