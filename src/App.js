@@ -1,10 +1,10 @@
 import './App.css';
-import Jabber from './components/Jabber/Jabber';
+import WebChat from './pages/AppPage/WebChat';
 
 function App() {
   return (
     <div className="App">
-      <Jabber />
+      <WebChat />
     </div>
   );
 }

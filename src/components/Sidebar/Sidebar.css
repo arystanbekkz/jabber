@@ -37,7 +37,7 @@
 }
 
 .sidebar__search:focus-within {
-    border: solid 2px lightgray;
+    border: solid 1px lightgray;
 }
 
 .search__input {

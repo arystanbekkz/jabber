@@ -1,0 +1,30 @@
+.chatMessage {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-width: 70%;
+}
+
+.chatMessage__content {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    margin-left: 12px;
+    border-radius: 5px;
+    background-color: #26272D;
+}
+
+.chatMessage__content h5 {
+    margin-top: 0;
+    margin-bottom: 2px;
+}
+
+.chatMessage__content p {
+    margin: 2px 0;
+}
+
+.chatMessage__content_timestamp {
+    font-size: x-small;
+    color: lightgrey;
+    align-self: flex-end;
+}
