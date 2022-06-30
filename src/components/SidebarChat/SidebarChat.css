@@ -1,0 +1,46 @@
+.sidebarChat {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 5px 12px 5px 20px;
+    transition: .2s;
+    cursor: pointer;
+    height: 80px;
+}
+
+.sidebarChat:hover {
+    background-color: #141416;
+}
+
+.sidebarChat__info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    width: 100%;
+    overflow: hidden; 
+}
+
+.sidebarChat__info_header {
+    margin: 0 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebarChat__info_header h5 {
+    margin: 0;
+}
+
+.sidebarChat__timestamp {
+    color: lightgray;
+    font-size: x-small;
+}
+
+.sidebarChat__info_message {
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
