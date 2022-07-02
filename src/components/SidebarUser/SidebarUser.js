@@ -10,8 +10,8 @@ import "./SidebarUser.css"
 const SidebarUser = ({user}) => {
     const navigate = useNavigate();
     const handleLogout = async () => {
-        await auth.signOut();
         navigate("/");
+        await auth.signOut();
     }
 
     return (
