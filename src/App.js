@@ -1,16 +1,16 @@
 import './App.css';
 import WebChat from './pages/AppPage/WebChat';
 import Login from './pages/LoginPage/Login';
-import { auth, provider } from "./firebase/firebase";
+import NotFound from './pages/NotFoundPage/NotFound';
+import { auth } from "./firebase/firebase";
 import { login, logout, selectUser } from './features/users';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
-
-  const user = useSelector(selectUser);
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
@@ -20,7 +20,7 @@ function App() {
           photo: authUser.photoURL,
           displayName: authUser.displayName,
           email: authUser.email
-        }))
+        }));
       } else {
         dispatch(logout());
       }
@@ -29,14 +29,13 @@ function App() {
 
 
   return (
+    
     <div className='App'>
       <Routes>
-        {user ?
-          <Route path='/' element={ <WebChat /> } />
-          :
-          <Route path='/' element={ <Login /> } />
-        }
-      </Routes>
+        <Route path='/chats' element={ <WebChat /> } />
+        <Route path='/' element={ <Login /> } />
+        <Route path='*' element={ <NotFound /> } />
+      </Routes> 
     </div>
   )
 }
