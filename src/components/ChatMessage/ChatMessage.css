@@ -3,12 +3,13 @@
     justify-content: flex-start;
     align-items: flex-start;
     max-width: 70%;
+    margin-bottom: 10px;
 }
 
 .chatMessage__content {
     display: flex;
     flex-direction: column;
-    padding: 5px;
+    padding: 10px;
     margin-left: 12px;
     border-radius: 5px;
     background-color: #26272D;

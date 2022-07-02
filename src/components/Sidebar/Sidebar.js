@@ -1,23 +1,54 @@
-import Ract from "react";
+import  { useEffect, useState } from "react";
 
-import "./Sidebar.css";
+import { useSelector } from "react-redux";
+
+import db from "../../firebase/firebase";
+import { collection, addDoc, onSnapshot } from "firebase/firestore"; 
+
+import { selectUser } from "../../features/users";
+
+import SidebarUser from "../SidebarUser/SidebarUser";
+import SidebarChat from "../SidebarChat/SidebarChat";
 
 import SearchIcon from '@mui/icons-material/Search';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import SidebarChat from "../SidebarChat/SidebarChat";
-import { Avatar, Icon, IconButton } from "@mui/material";
-import { Forum, Phone, Settings } from "@mui/icons-material";
-import LogoutIcon from '@mui/icons-material/Logout';
-import { selectUser } from "../../features/users";
-import { useSelector } from "react-redux";
-import { auth } from "../../firebase/firebase";
+import { IconButton } from "@mui/material";
 
-
-
+import "./Sidebar.css";
 
 const Sidebar = () => {
 
     const user = useSelector(selectUser);
+    const [chats, setChats] = useState([]);
+
+    function getChats() {
+        onSnapshot(collection(db, 'chats'), (snapshot) => {
+            setChats(snapshot.docs.map((doc) => ({
+                id: doc.id,
+                data: doc.data()
+            })))
+        });
+    }
+
+    useEffect(() => {
+        getChats();
+    }, [])
+
+    async function createChat() {
+        let chatName = prompt("Enter a chat name");
+        if (chatName.trim().length >= 1) {
+            try {
+                const doc = await addDoc(collection(db, 'chats'), {
+                    chatName: chatName
+                });
+            } catch(error) {
+                console.log("An error occured while creating chat...", error);
+            }
+            
+        } else {
+            alert("Chat was not created. Please try again...")
+        }
+    }
 
     return (
         <div className="sidebar">
@@ -26,7 +57,9 @@ const Sidebar = () => {
                     <SearchIcon className="sidebar__search_icon" />
                     <input placeholder="Search" className="search__input" />
                 </div>
-                <IconButton>
+                <IconButton 
+                    onClick={createChat}
+                >
                     <BorderColorIcon />
                 </IconButton>
                 
@@ -37,81 +70,17 @@ const Sidebar = () => {
                     <h4>Chats</h4>
                 </div>
                 <div className="sidebar__chats_list">
-                    <SidebarChat 
-                        id = "1"
-                        chatName = "FirstChat"
-                    />
-                    <SidebarChat 
-                        id = "1"
-                        chatName = "FirstChat"
-                    />
-                    <SidebarChat 
-                        id = "1"
-                        chatName = "FirstChat"
-                    />
-                    <SidebarChat 
-                        id = "1"
-                        chatName = "FirstChat"
-                    />
-                    <SidebarChat 
-                        id = "1"
-                        chatName = "FirstChat"
-                    />
-                    <SidebarChat 
-                        id = "1"
-                        chatName = "FirstChat"
-                    />
-                    <SidebarChat 
-                        id = "1"
-                        chatName = "FirstChat"
-                    />
-                    <SidebarChat 
-                        id = "1"
-                        chatName = "FirstChat"
-                    />
-                    <SidebarChat 
-                        id = "1"
-                        chatName = "FirstChat"
-                    />
-                    <SidebarChat 
-                        id = "1"
-                        chatName = "FirstChat"
-                    />
-                    <SidebarChat 
-                        id = "1"
-                        chatName = "FirstChat"
-                    />
-                    <SidebarChat 
-                        id = "1"
-                        chatName = "FirstChat"
-                    />
-                    <SidebarChat 
-                        id = "1"
-                        chatName = "FirstChat"
-                    />
+                    {chats.map(({id, data:{chatName}}) => (
+                        <SidebarChat 
+                            key={id}
+                            id={id}
+                            chatName={chatName}
+                        />
+                    )
+                    )}
                 </div>
             </div>
-            <div className="sidebar__footer">
-                <IconButton>
-                    <Avatar 
-                        className="sidebar__footer_avatar"
-                        src={user.photo}
-                    />
-                </IconButton>
-                <IconButton>
-                    <Phone />
-                </IconButton>
-                <IconButton>
-                    <Forum />
-                </IconButton>
-                <IconButton>
-                    <Settings />
-                </IconButton>
-                <IconButton onClick={() => auth.signOut()}>
-                    <LogoutIcon />
-                </IconButton>
-            </div>
-            
+            <SidebarUser user={user}/>
         </div>
     )
 }

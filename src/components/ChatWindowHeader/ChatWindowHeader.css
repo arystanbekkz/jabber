@@ -1,0 +1,21 @@
+
+.chatWindow__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px 20px;
+    border-bottom: solid 1px #37393C;
+}
+
+.chatWindow__header_info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 10px;
+    margin-top: -5px;
+}
+
+.chatWindow__header_info h4, .chatWindow__header_info h5 {
+    margin: 0;
+}
+

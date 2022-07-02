@@ -22,7 +22,7 @@ const Login = () => {
                         size="large"
                         onClick={signIn}
                         >
-                            Sign In
+                            Sign In With Google
                         </Button>
             </div>
         </div>

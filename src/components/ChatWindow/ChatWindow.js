@@ -1,41 +1,50 @@
-import { Avatar, IconButton } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectChatId, selectChatName } from "../../features/chat";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { selectUser } from "../../features/users";
+import db from "../../firebase/firebase";
+
+import ChatWindowHeader from "../ChatWindowHeader/ChatWindowHeader";
+import ChatWindowInput from "../ChatWindowInput/ChatWindowInput";
+import ChatWindowMessages from "../ChatWindowMessages/ChatWindowMessages";
+
 import "./ChatWindow.css";
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import SendIcon from '@mui/icons-material/Send';
-import ChatMessage from "../ChatMessage/ChatMessage";
+
 
 const ChatWindow = () => {
 
+    
+    const [messages, setMessages] = useState([]);
+    const chatName = useSelector(selectChatName);
+    const chatId = useSelector(selectChatId);
+    const user = useSelector(selectUser);
+
+    useEffect(() => {
+        if(chatId) {
+            const collRef = collection(db, 'chats', `${chatId}`, 'messages');
+            const q = query(collRef, orderBy("timestamp", "asc"));
+            onSnapshot(q, (snapshot) => {
+                setMessages(snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    data: doc.data()
+                })));
+            })
+        }
+    }, [chatId])
+
     return (
         <div className="chatWindow">
-            <div className="chatWindow__header">
-                <div className="chatWindow__header_avatar">
-                    <Avatar />
-                </div>
-                <div className="chatWindow__header_info">
-                    <h4>ChatName</h4>
-                    <h5>JustNow</h5>
-                </div>
-                <IconButton>
-                    <MoreVertIcon className="chatWindow__header_more
-                    "/>
-                </IconButton>
-            </div>
-            <div className="chatWindow__messagesList">
-                <ChatMessage />
-            </div>
-            <div className="chatWindow__messageInput">
-                <form className="chatWindow__messageInput_form">
-                    <input 
-                        type={"text"}
-                        placeholder="Enter a message..."
-                    />
-                    <IconButton className="chatWindow__messageInput_sendBtn">
-                        <SendIcon />
-                    </IconButton>
-                </form>
-            </div>
+            <ChatWindowHeader 
+                chatId={chatId} 
+                photoUrl={user.photo}
+                chatName={chatName}
+            /> 
+
+            <ChatWindowMessages 
+                messages={messages}
+            />
+            <ChatWindowInput />
         </div>
     )
 }

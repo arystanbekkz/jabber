@@ -24,9 +24,6 @@ function App() {
       } else {
         dispatch(logout());
       }
-
-      console.log(authUser);
-
     })
   }, [dispatch])
 
@@ -36,7 +33,6 @@ function App() {
       <Routes>
         {user ?
           <Route path='/' element={ <WebChat /> } />
-
           :
           <Route path='/' element={ <Login /> } />
         }

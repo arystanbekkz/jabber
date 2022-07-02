@@ -8,9 +8,11 @@
 }
 
 .login__wrapper {
-    width: 320px;
-    height: 320px;
-    background-color: #1C1D22;
+    width: 30%;
+    height: 30%;
+    min-width: 300px;
+    min-height: 300px;
+    background-color: #444454;
     border-radius: 10px;
     display: flex;
     flex-direction: column;

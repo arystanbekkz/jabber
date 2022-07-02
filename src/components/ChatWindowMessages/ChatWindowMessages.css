@@ -1,0 +1,8 @@
+.chatWindow__messagesList {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    padding: 12px 20px;
+    height: 100%;
+    background-color: #141416;
+}

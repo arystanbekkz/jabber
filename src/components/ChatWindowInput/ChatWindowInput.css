@@ -1,0 +1,29 @@
+.chatWindow__messageInput {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    width: 100%;
+    border-top: #37393C solid 1px;
+}
+
+.chatWindow__messageInput_form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.chatWindow__messageInput_form input{
+    height: 52px;
+    width: 100%;
+    margin-right: 10px;
+    border-radius: 8px;
+    border: 1px transparent solid;
+    background-color: #393a3f;
+    color: lightgray;
+    padding: 12px;
+}
+
+.chatWindow__messageInput_form input:focus-within {
+    border-color: lightgray;
+    outline: none;
+}
