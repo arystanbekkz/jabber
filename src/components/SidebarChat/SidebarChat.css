@@ -16,9 +16,12 @@
 .sidebarChat__info {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     margin-left: 12px;
     width: 100%;
+    height: 80%;
     overflow: hidden; 
+    font-size: 12px;
 }
 
 .sidebarChat__info_header {
@@ -30,6 +33,7 @@
 
 .sidebarChat__info_header h5 {
     margin: 0;
+    font-size: 14px;
 }
 
 .sidebarChat__timestamp {

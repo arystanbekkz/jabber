@@ -4,7 +4,7 @@ import  "./ChatWindowMessages.css"
 const ChatWindowMessages = ({messages}) => {
     return (
         <div className="chatWindow__messagesList">
-            { messages.map(({id, data}) => (
+            {messages && messages.map(({id, data}) => (
                 <ChatMessage
                     key={id}
                     id={id}

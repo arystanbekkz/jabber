@@ -5,6 +5,7 @@ import { Avatar, IconButton } from "@mui/material";
 import LogoutIcon from '@mui/icons-material/Logout';
 
 import "./SidebarUser.css"
+import { logout } from "../../features/users";
 
 
 const SidebarUser = ({user}) => {
@@ -12,6 +13,7 @@ const SidebarUser = ({user}) => {
     const handleLogout = async () => {
         navigate("/");
         await auth.signOut();
+        logout();
     }
 
     return (

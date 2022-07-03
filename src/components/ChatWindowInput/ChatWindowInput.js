@@ -20,7 +20,7 @@ const ChatWindowInput = () => {
 
     const handleInput = (e) => {
         e.preventDefault();
-        if (input.trim().length > 0) {
+        if (user && input.trim().length > 0) {
             sendMessage(chatId, user, input);
         }
         setInput("");

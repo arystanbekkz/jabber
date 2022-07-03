@@ -1,11 +1,13 @@
 
-import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { addDoc, doc, setDoc, Timestamp } from "firebase/firestore";
 import db from "../firebase/firebase";
 
 export const sendMessage = async (chatId, user, message) => {
-    const docRef = doc(db, `chats/${chatId}/messages/${String(new Date())}`);
+    const date = new Date();
+    const docRef = doc(db, `chats/${chatId}/messages/${String(date)}`);
+    const docRefLast = doc(db, `lastMessages`, chatId);
     const payload = {
-        timestamp: serverTimestamp(),
+        timestamp: Timestamp.fromDate(date),
         message: message,
         uid: user.uid,
         photo: user.photo,
@@ -13,4 +15,5 @@ export const sendMessage = async (chatId, user, message) => {
         displayName: user.displayName
     };
     await setDoc(docRef, payload);
+    await setDoc(docRefLast, payload);
 }

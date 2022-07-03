@@ -4,12 +4,9 @@ import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../firebase/firebase";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../features/users";
 
 const Login = () => {
     const navigate = useNavigate();
-    const user = useSelector(selectUser);
 
     const signIn = async () => {
         try {
@@ -22,7 +19,6 @@ const Login = () => {
 
     return (
         <div className="login">
-            {user && navigate('/chats')}
             <div className="login__wrapper">
                 <h2 className="appName">Welcome to WebChat</h2>
                 <Button className="login__button"

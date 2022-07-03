@@ -14,11 +14,12 @@ import "./ChatWindow.css";
 
 const ChatWindow = () => {
 
+    const user = useSelector(selectUser);
+
     
     const [messages, setMessages] = useState([]);
     const chatName = useSelector(selectChatName);
     const chatId = useSelector(selectChatId);
-    const user = useSelector(selectUser);
 
     useEffect(() => {
         if(chatId) {
@@ -37,7 +38,6 @@ const ChatWindow = () => {
         <div className="chatWindow">
             <ChatWindowHeader 
                 chatId={chatId} 
-                photoUrl={user.photo}
                 chatName={chatName}
             /> 
 

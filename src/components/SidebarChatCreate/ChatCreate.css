@@ -1,0 +1,36 @@
+.sidebar__chatCreate {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 1px solid #37393C;
+    padding: 12px 12px 20px 20px;
+}
+
+.sidebar__chatCreate > .MuiIconButton-root {
+    color: white;
+}
+
+.sidebar__chatName {
+    display: flex;
+    margin-right: 10px;
+    width: 100%;
+    padding: 0 12px;
+    height: 40px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #393a3f;
+    border-radius: 8px;
+}
+
+.sidebar__chatName:focus-within {
+    border: solid 1px lightgray;
+}
+
+.createChat__input {
+    border: none;
+    width: 100%;
+    background-color: transparent;
+    color: white;
+    outline: none;
+}

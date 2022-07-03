@@ -19,3 +19,10 @@
     margin: 0;
 }
 
+@media screen and (min-width: 581px) {
+    .back__arrow {
+        display: none;
+    }    
+}
+
+

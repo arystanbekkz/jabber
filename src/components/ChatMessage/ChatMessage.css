@@ -11,6 +11,7 @@
     flex-direction: column;
     padding: 10px;
     margin-left: 12px;
+    margin-right: 12px;
     border-radius: 5px;
     background-color: #26272D;
 }
@@ -26,6 +27,15 @@
 
 .chatMessage__content_timestamp {
     font-size: x-small;
-    color: lightgrey;
     align-self: flex-end;
+}
+
+.myMessage {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.myMessage .chatMessage__content {
+    background-color: #BDD2B6;
+    color: #141416;
 }
