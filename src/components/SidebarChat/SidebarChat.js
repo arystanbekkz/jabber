@@ -7,7 +7,7 @@ import { selectUser } from "../../features/users";
 import db from "../../firebase/firebase";
 import "./SidebarChat.css"
 
-const SidebarChat = ({chatId, chatName, lastMessages}) => {
+const SidebarChat = ({chatId, chatName, lastMessages, toggle}) => {
     const dispatch = useDispatch();
     const [chatInfo, setChatInfo] = useState([]);
     const [lastMessage, setLastMessage] = useState({});
@@ -17,7 +17,14 @@ const SidebarChat = ({chatId, chatName, lastMessages}) => {
         setLastMessage(lastMessages.filter(({id, data}) => id === chatId));
     }, [lastMessages])
     
-    
+    const handleClick = () => {
+        dispatch(setChat({
+            chatId: chatId,
+            chatName: chatName
+        }));
+        toggle();
+    }
+
     const date = lastMessage[0] ? new Date(lastMessage[0].data.timestamp.toDate()).toLocaleDateString() : '';
     const time = lastMessage[0] ? new Date(lastMessage[0].data.timestamp.toDate()).toLocaleTimeString() : '';
     const message = lastMessage[0] ? lastMessage[0].data.message : '';
@@ -29,10 +36,7 @@ const SidebarChat = ({chatId, chatName, lastMessages}) => {
 
     return (
         <div
-            onClick={() => dispatch(setChat({
-                chatId: chatId,
-                chatName: chatName
-            }))}
+            onClick={handleClick}
             className="sidebarChat"
         >
             <Avatar />

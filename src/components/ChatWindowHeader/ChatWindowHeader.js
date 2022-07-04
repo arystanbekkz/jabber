@@ -2,16 +2,15 @@ import { Avatar, IconButton } from "@mui/material";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import "./ChatWindowHeader.css";
-import { useEffect, useState } from "react";
-import { collection, doc, onSnapshot } from "firebase/firestore";
-import db from "../../firebase/firebase";
 
-const ChatWindowHeader = ({chatId, chatName}) => {
+
+const ChatWindowHeader = ({chatId, chatName, toggle}) => {
 
     return (
         <div className="chatWindow__header">
             <div className="back__arrow">
                 <IconButton  
+                    onClick={toggle}
                 >
                     <ArrowBackIcon />
                 </IconButton>

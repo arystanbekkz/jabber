@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectChatId, selectChatName } from "../../features/chat";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { selectUser } from "../../features/users";
 import db from "../../firebase/firebase";
 
 import ChatWindowHeader from "../ChatWindowHeader/ChatWindowHeader";
@@ -12,11 +11,8 @@ import ChatWindowMessages from "../ChatWindowMessages/ChatWindowMessages";
 import "./ChatWindow.css";
 
 
-const ChatWindow = () => {
-
-    const user = useSelector(selectUser);
-
-    
+const ChatWindow = ({hideChat, toggle}) => {
+   
     const [messages, setMessages] = useState([]);
     const chatName = useSelector(selectChatName);
     const chatId = useSelector(selectChatId);
@@ -35,10 +31,11 @@ const ChatWindow = () => {
     }, [chatId])
 
     return (
-        <div className="chatWindow">
+        <div className={`chatWindow ${hideChat ? 'hidden' : ''}`}>
             <ChatWindowHeader 
                 chatId={chatId} 
                 chatName={chatName}
+                toggle={toggle}
             /> 
 
             <ChatWindowMessages 

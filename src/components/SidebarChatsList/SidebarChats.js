@@ -1,7 +1,7 @@
 import SidebarChat from "../SidebarChat/SidebarChat";
 import "./SidebarChats.css"
 
-const SidebarChats = ({user, chats, lastMessages}) => {
+const SidebarChats = ({user, chats, lastMessages, toggle}) => {
 
     return (
         <div className="sidebar__chats">
@@ -15,6 +15,7 @@ const SidebarChats = ({user, chats, lastMessages}) => {
                         chatId={id}
                         chatName={chatName}
                         lastMessages={lastMessages}
+                        toggle={toggle}
                     />
                 )
                 )}

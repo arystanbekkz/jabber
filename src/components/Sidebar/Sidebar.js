@@ -9,7 +9,7 @@ import ChatCreate from "../SidebarChatCreate/ChatCreate";
 
 import "./Sidebar.css";
 
-const Sidebar = ({user}) => {
+const Sidebar = ({user, toggle}) => {
     const [chats, setChats] = useState([]);
     const [lastMessages, setLastMessages] = useState([]);
 
@@ -34,7 +34,6 @@ const Sidebar = ({user}) => {
     useEffect(() => {
         getChats();
         getLastMessages();
-        console.log(lastMessages);
     }, [])
 
     
@@ -42,7 +41,7 @@ const Sidebar = ({user}) => {
     return (
         <div className="sidebar">
             <ChatCreate />           
-            <SidebarChats user={user} chats={chats} lastMessages={lastMessages} />
+            <SidebarChats user={user} chats={chats} lastMessages={lastMessages} toggle={toggle}/>
             <SidebarUser user={user}/>
         </div>
     )

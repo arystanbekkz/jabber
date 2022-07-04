@@ -5,4 +5,5 @@
     width: 100vw;
     position: relative;
     transition: 0.3s;
+    overflow: hidden;
 }
